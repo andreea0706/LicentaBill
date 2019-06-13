@@ -1,0 +1,80 @@
+﻿@model Invoice.Core.ViewModel.ReturnedInfoAnafViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br /> <br /><br /><br /><br />
+<div class="container">
+    <h2>Bine ai venit</h2>
+    <h3>Te rog sa verifici daca informatiile urmatoare sunt corecte</h3>
+
+    <br /><br /><br />
+        <form asp-action="Register" asp-controller="Home" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="cui" class="control-label"></label>
+                        <input asp-for="cui" class="form-control" />
+                        <span asp-validation-for="cui" class="text-danger"></span>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="FirmName"></label>
+                        <input asp-for="FirmName" class="form-control" />
+                        <span asp-validation-for="FirmName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="scpTVA" type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Platitor in scopuri TVA</label>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="mesaj_ScpTVA"></label>
+                        <input asp-for="mesaj_ScpTVA" class="form-control" />
+                        <span asp-validation-for="mesaj_ScpTVA" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="tipActTvaInc"></label>
+                        <input asp-for="tipActTvaInc" class="form-control" />
+                        <span asp-validation-for="tipActTvaInc" class="text-danger"></span>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="statusTvaIncasare" type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Platitor de TVA la incasare</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="statusSplitTVA" type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Aplica plata defalcata a TVA</label>
+                    </div>
+                </div>
+            </div>
+                <div class="form-group">
+                    <input type="submit" value="Autentificare" class="btn btn-default btn-info" />
+                </div>
+        </form>
+    <br /><br /><br /><br /><br /><br /><br />
+</div>
