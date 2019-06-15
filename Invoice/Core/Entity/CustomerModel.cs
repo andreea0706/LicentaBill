@@ -12,12 +12,20 @@ namespace Invoice.Core.Entity
     public class CustomerModel : BaseModel
     {
         [Required]
+        [Display(Name = "Nume")]
         public string Name { get; set; }
+
         [EmailAddress]
         public string Email { get; set; }
+
         [Required]
+        [Display(Name = "Numar de telefon")]
         public string Phone { get; set; }
+
+        [Display(Name = "Adresa")]
         public string Address { get; set; }
+
+        [Display(Name = "Detalii")]
         public string Notes { get; set; }
 
     }

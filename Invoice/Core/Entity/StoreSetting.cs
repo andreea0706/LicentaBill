@@ -15,23 +15,28 @@ namespace Invoice.Core.Entity
 
         public string Logo { get; set; }
 
-        [DisplayName("Store Name")]
+        [DisplayName("Nume Organizatie")]
         [Required]
         public string StoreName { get; set; }
 
         [EmailAddress]
         [Required]
         public string Email { get; set; }
+
         [Required]
         public string Web { get; set; }
 
         [Phone]
         [Required]
+        [DisplayName("Numar telefon")]
         public string Phone { get; set; }
 
         [Required]
+        [DisplayName("Moneda")]
         public string Currency { get; set; }
+
         [Required]
+        [DisplayName("Adresa")]
         public string Address { get; set; }
 
     }

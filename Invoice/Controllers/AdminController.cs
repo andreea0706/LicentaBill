@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Invoice.Core.Entity;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.PlatformAbstractions;
+using Newtonsoft.Json.Linq;
 
 namespace Invoice.Controllers
 {
@@ -25,6 +27,7 @@ namespace Invoice.Controllers
         private readonly IProductRepository _productRepository;
         private readonly IStoreSettingRepository storeSettingRepository;
         private readonly ISaleRepository saleRepository;
+        private static readonly HttpClient client = new HttpClient();
 
         public AdminController(ICustomerRepository customerRepository,
             IProductRepository productRepository, IStoreSettingRepository storeSettingRepository,
@@ -55,6 +58,48 @@ namespace Invoice.Controllers
         {
             return View(customerRepository.All());
         }
+
+
+        [HttpGet]
+        public ActionResult AddCustomerAnaf()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(String))]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> ReturnInfoAnaf(InfoAnafViewModel model)
+        {
+            model.data = DateTime.Today.ToString("yyyy-MM-dd");
+
+            HttpResponseMessage result = await client.PostAsJsonAsync("https://webservicesp.anaf.ro/PlatitorTvaRest/api/v3/ws/tva",
+                                             new List<InfoAnafViewModel>() { model });
+            HttpContent content = result.Content;
+            string resultContent = await content.ReadAsStringAsync();
+            ReturnedInfoAnafViewModel returnedInfo = new ReturnedInfoAnafViewModel();
+            if (resultContent != null)
+            {
+                dynamic json = JValue.Parse(resultContent);
+                dynamic requestedFirm = json.found[0];
+                returnedInfo = new ReturnedInfoAnafViewModel
+                {
+                    cui = requestedFirm.cui,
+                    Address = requestedFirm.adresa,
+                    FirmName = requestedFirm.denumire,
+                    scpTVA = requestedFirm.scpTVA,
+                };
+            }
+            else
+            {
+                return RedirectToAction("ErrorRegister");
+            }
+
+            return View(returnedInfo);
+        }
+
+
+
 
         [HttpGet]
         public ActionResult AddCustomer()
@@ -259,9 +304,9 @@ namespace Invoice.Controllers
                 return View(settings);
             return View(new StoreSettingModel());
         }
+
+
         [HttpPost]
-
-
         public IActionResult Settings(StoreSettingModel model, IFormFile logoPostedFileBase)
         {
             if (!ModelState.IsValid) return View(model);

@@ -19,5 +19,18 @@ namespace Invoice.Core.Entity
 
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Cui")]
+        public string cui { get; set; }
+
+        [Display(Name = "Adresa")]
+        public string Address { get; set; }
+
+        [Display(Name = "Nume Firma")]
+        public string FirmName { get; set; }
+
+        [Display(Name = "Platitor in scopuri TVA")]
+        public Boolean scpTVA { get; set; }
+
     }
 }

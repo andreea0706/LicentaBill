@@ -68,11 +68,6 @@ namespace Invoice.Controllers
                     Address = requestedFirm.adresa,
                     FirmName = requestedFirm.denumire,
                     scpTVA = requestedFirm.scpTVA,
-                    mesaj_ScpTVA = requestedFirm.mesaj_ScpTVA,
-                    tipActTvaInc = requestedFirm.tipActTvaInc,
-                    statusTvaIncasare = requestedFirm.statusTvaIncasare,
-                    statusInactivi = requestedFirm.statusInactivi,
-                    statusSplitTVA = requestedFirm.statusSplitTVA
                 };
             }
             else
@@ -98,8 +93,11 @@ namespace Invoice.Controllers
             {
                 Email = model.Email,
                 Password = model.Password,
-                ConfirmPassword = model.ConfirmPassword
-               
+                ConfirmPassword = model.ConfirmPassword,
+                cui = model.cui,
+                FirmName = model.FirmName,
+                Address = model.Address,
+                scpTVA = model.scpTVA
             };
            
             userRepository.Insert(newUser);

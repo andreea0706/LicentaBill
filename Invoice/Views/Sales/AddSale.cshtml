@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "AddSale";
+    ViewData["Title"] = "Adauga Vanzare";
     Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
 
@@ -27,9 +27,9 @@
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" rel="stylesheet" />
 
-<div class="page-wrapper">
-    <div class="container-fluid">
-        <div class="row">
+<div class="page-wrapper ">
+    <div class="container-fluid ">
+        <div class="row ">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-title">
@@ -40,35 +40,35 @@
                             <div class="form-inline">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="Name">Customer &nbsp  </label>
-                                        <select id="Customer" class="form-control" onchange="blankme(this.id)">
-                                            <option value="">Select Customer</option>
+                                        <label for="Name" style="font-size:20px;">Client &nbsp  </label>
+                                        <select id="Customer" class="form-control" onchange="blankme(this.id)" style="border-width:thin; border-color:black;">
+                                            <option value="">Selecteaza Client</option>
                                         </select>
                                         <small id="error_Customer" class="form-text error_msg">Select customer from list</small>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="Code"> Code  &nbsp</label>
-                                        @Html.TextBox("Code", null, new { @class = "form-control", @placeholder = "Enter Sale No", onkeyup = "blankme(this.id)" })
-                                        <small id="error_Code" class="form-text error_msg col-md-offset-2 "> Sale Code is Required</small>
+                                        <label for="Code" style="font-size:20px; border-width:thin; border-color:black;"> Serie  &nbsp</label>
+                                        @Html.TextBox("Code", null, new { @class = "form-control", @placeholder = "Serie Factura", onkeyup = "blankme(this.id)", @style= "border-width:thin; border-color:black;" })
+                                        <small id="error_Code" class="form-text error_msg col-md-offset-2 "> Seria Facturii este necesara!</small>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="Date"> Date  &nbsp</label>
-                                        @Html.TextBox("Date", null, new { @class = "form-control mydatepicker", @placeholder = "Select Sale Date ", onchange = "blankme(this.id)" })
-                                        <small id="error_Date" class="form-text error_msg col-md-offset-2 ">Sale Date is Required</small>
+                                        <label for="Date" style="font-size:20px;"> Data  &nbsp</label>
+                                        @Html.TextBox("Date", null, new { @class = "form-control mydatepicker", @placeholder = "Selecteaza Data Vanzarii", onchange = "blankme(this.id)", @style = "border-width:thin; border-color:black;" })
+                                        <small id="error_Date" class="form-text error_msg col-md-offset-2 ">Data Vanzarii este necesara!</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <br /> <br />
                         <div class="col-md-12">
-                            <label class="col-md-2">Search Product</label>
+                            <label class="col-md-2" style="font-size:20px;">Cauta Produs</label>
                             <div class="input-group input-group-default col-md-8">
                                 <span class="input-group-btn"><button class="btn btn-primary" type="submit"><i class="ti-search"></i></button></span>
-                                <input type="text" placeholder="Search Product" name="Search" id="Search" class="form-control">
+                                <input type="text" placeholder="Cautare..." name="Search" id="Search" class="form-control" style="border-width:thin; border-color:black;">
                             </div>
 
                             <br />
@@ -77,10 +77,10 @@
                                 <thead>
                                     <tr>
                                        
-                                        <th style="width:280px">Name</th>
+                                        <th style="width:280px">Nume Produs</th>
                                         <th>Unit</th>
-                                        <th>Quantity</th>
-                                        <th>Amount</th>
+                                        <th>Cantitate</th>
+                                        <th>Valoare</th>
                                         <th style="width:20px"></th>
 
                                     </tr>
@@ -98,7 +98,7 @@
                                 </tfoot>
                             </table>
 
-                            <small id="error_SubTotal" class="form-text error_msg">Atleast add one item</small>
+                            <small id="error_SubTotal" class="form-text error_msg">Adauga cel putin un produs</small>
                             <br />
                             <br />
 
@@ -106,28 +106,28 @@
                                 <div class="col-md-5">
 
                                     <div class="form-group">
-                                        <label for="Date"> Payment Method : </label>
+                                        <label for="Date" style="font-size:20px;"> Metoda plata: </label>
                                         @Html.DropDownList("Payment", new List<SelectListItem>
                                         {
                                             new SelectListItem() {Text = "Cash", Value="Cash"},
                                             new SelectListItem() {Text = "Check", Value="Check"},
-                                        }, "Select Payment", new { @class = "form-control", onchange = "blankme(this.id)" })
-                                        <small id="error_Payment" class="form-text error_msg">Select Payment Method</small>
+                                        }, "Selecteaza metoda plata", new { @class = "form-control", onchange = "blankme(this.id)", @style = "border-width:thin; border-color:black;" })
+                                        <small id="error_Payment" class="form-text error_msg">Selecteaza metoda plata</small>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="Status"> Status : </label>
+                                        <label for="Status" style="font-size:20px;"> Status : </label>
                                         @Html.DropDownList("Status", new List<SelectListItem>
                                         {
-                                            new SelectListItem() {Text = "Due", Value="Due"},
-                                            new SelectListItem() {Text = "Paid", Value="Paid"},
-                                        }, "Select Status", new { @class = "form-control", onchange = "blankme(this.id)" })
-                                        <small id="error_Status" class="form-text error_msg">Select Sale Status</small>
+                                            new SelectListItem() {Text = "De platit", Value="De platit"},
+                                            new SelectListItem() {Text = "Platita", Value="Platita"},
+                                        }, "Selecteaza statusul vanzarii", new { @class = "form-control", onchange = "blankme(this.id)", @style = "border-width:thin; border-color:black;" })
+                                        <small id="error_Status" class="form-text error_msg">Selecteaza statusul vanzarii</small>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="Notes"> Notes: </label>
-                                        @Html.TextArea("Notes", new { @class = "form-control", @rows = "5", @placeholder = "Enter Notes" })
+                                        <label for="Notes" style="font-size:20px;"> Notes: </label>
+                                        @Html.TextArea("Detalii", new { @class = "form-control", @rows = "5", @placeholder = "Adauga Detalii plata", @style = "border-width:thin; border-color:black;" })
                                     </div>
                                 </div>
 
@@ -135,12 +135,12 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Discount"> Discount : </label>
-                                        @Html.TextBox("Discount", null, new { @class = "form-control", @Value = 0, @type = "number", @placeholder = "Discount Amount ", onchange = "DiscountAmount()" })
+                                        @Html.TextBox("Discount", null, new { @class = "form-control", @Value = 0, @type = "number", @placeholder = " ", onchange = "DiscountAmount()", @style = "border-width:thin; border-color:black;" })
                                         <small id="error_Discount" class="form-text error_msg">Discount can't be empty</small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="GrandTotal"> Grand Total : </label>
-                                        <input type="text" id="GrandTotal" class="form-control" readonly />
+                                        <label for="GrandTotal">Total : </label>
+                                        <input type="text" id="GrandTotal" class="form-control" readonly style = "border-width:thin; border-color:black;" />
                                         <small id="error_GrandTotal" class="form-text error_msg">Total is empty</small>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@
 
                             <div class="form-horizontal">
                                 <label> </label>
-                                <input id="BtnSave" class="btn btn-success col-md-3 pull-right" type="submit" value="Save Sale" />
+                                <input id="BtnSave" class="btn btn-info col-md-3 pull-right" type="submit" value="Salveaza Factura" />
                             </div>
                         </div>
                     </div>

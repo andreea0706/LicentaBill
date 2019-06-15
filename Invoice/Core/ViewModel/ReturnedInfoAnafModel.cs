@@ -10,7 +10,7 @@ namespace Invoice.Core.ViewModel
     {
        
         [Display(Name = "CUI")]
-        public int cui { get; set; }
+        public string cui { get; set; }
 
         [Required]
         [EmailAddress]
@@ -39,20 +39,12 @@ namespace Invoice.Core.ViewModel
         [Display(Name = "Platitor in scopuri TVA")]
         public Boolean scpTVA { get; set; }
 
-        [Display(Name = "Mesaj Anaf")]
-        public string mesaj_ScpTVA { get; set; }
+        [Required]
+        [Display(Name = "Numar de telefon")]
+        public string Phone { get; set; }
 
-        [Display(Name = "Tip activitate TVA la incasare")]
-        public string tipActTvaInc { get; set; }
+        [Display(Name = "Detalii")]
+        public string Notes { get; set; }
 
-        [Display(Name = "Platitor TVA la incasare")]
-        public Boolean statusTvaIncasare { get; set; }
-
-        [DataType(DataType.Date)]
-        [Display(Name = "Contribuabil inactiv?")]
-        public Boolean statusInactivi { get; set; }
-
-        [Display(Name = "Status split TVA")]
-        public Boolean statusSplitTVA { get; set; }
     }
 }

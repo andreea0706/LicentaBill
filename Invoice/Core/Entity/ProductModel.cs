@@ -13,14 +13,18 @@ namespace Invoice.Core.Entity
     public class ProductModel : BaseModel
     {
         [Required]
+        [DisplayName("Nume Produs")]
         public string Name { get; set; }
 
         [Required]
-        [DisplayName("Code")]
+        [DisplayName("Cod Produs")]
         public string Code { get; set; }
 
         [Required]
+        [DisplayName("Pret")]
         public double Price { get; set; }
+
+        [DisplayName("Descriere")]
         public string Description{ get; set; }
 
     }

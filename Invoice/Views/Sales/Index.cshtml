@@ -18,13 +18,13 @@
                             <table id="example23" class="display nowrap table table-hover  table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Code</th>
-                                        <th>Date</th>
+                                        <th>Serie Factura</th>
+                                        <th>Data</th>
                                         <th>Total</th>
-                                        <th>Discount</th>
-                                        <th>Grand Total</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Reducere</th>
+                                        <th>Total Vanzare</th>
+                                        <th>Status Factura</th>
+                                        <th>Optiuni</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,12 +39,12 @@
                                             <td>
                                                 @if (item.Status == "Due")
                                                 {
-                                                    <label class="label label-warning">due</label>
+                                                    <label class="label label-warning">De platit</label>
 
                                                 }
                                                 @if (item.Status == "Paid")
                                                 {
-                                                    <label class="label label-success">paid</label>
+                                                    <label class="label label-success">Platita</label>
 
                                                 }
                                             </td>
@@ -56,7 +56,7 @@
                                                 <a href="@Url.Action("EditSale", "Sales", new {saleId= item.Id})" title="Edit" class="btn btn-icon btn-warning btn-xs m-b-5">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a href="@Url.Action("DeleteSale", "Sales", new {saleId = item.Id})"  title="delete" onclick="return confirm('Are you sure you want to Remove this customer?')" class="btn btn-icon btn-danger btn-xs m-b-5">
+                                                <a href="@Url.Action("DeleteSale", "Sales", new {saleId = item.Id})"  title="delete" onclick="return confirm('Sigur doresti sa stergi aceasta factura?')" class="btn btn-icon btn-danger btn-xs m-b-5">
                                                     <i class="fa fa-remove"></i>
                                                 </a>
                                             </td>
