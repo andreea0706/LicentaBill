@@ -26,9 +26,16 @@
                     <br />
                     <div class="card-body">
                         <div class="basic-elements">
-                            <form asp-controller="admin" asp-action="AddCustomer" method="post">
+                            <form asp-controller="admin" asp-action="AddCustomerAnaf" method="post">
                                 <div class="row">
                                     <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label asp-for="Name"></label>
+                                            <div>
+                                                <input asp-for="Name" type="text" class="form-control" required style="display: inline-block; width:250px; border-width:thin; border-bottom-color:black;" />
+                                            </div>
+                                            <span asp-validation-for="Name" class="text-danger"></span>
+                                        </div>
                                         <div class="form-group">
                                             <label asp-for="FirmName"></label>
                                             <div>

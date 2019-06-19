@@ -39,12 +39,14 @@ namespace Invoice.Controllers
         {
             return View(saleRepository.All());
         }
+
         [HttpGet]
         public IActionResult AddSale()
         {
             ViewBag.customers = customerRepository.GetAllForDropDown();
             return View();
         }
+
         [HttpPost]
         public IActionResult AddSale([FromBody] SalesModel model)
         {
@@ -55,6 +57,7 @@ namespace Invoice.Controllers
             }
             return Json(new { error = true, message = "failed to save Sales" });
         }
+
         [HttpGet]
         public IActionResult EditSale(int saleId)
         {
@@ -108,6 +111,7 @@ namespace Invoice.Controllers
             saleRepository.Delete(item);
             return RedirectToAction("index");
         }
+
         [HttpGet]
         public ActionResult SalesReport(DateTime? From, DateTime? To)
         {
@@ -149,6 +153,7 @@ namespace Invoice.Controllers
             }
             return RedirectToAction("index");
         }
+
         [HttpGet]
         public JsonResult GetSales(int saleId)
         {

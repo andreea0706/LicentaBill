@@ -56,14 +56,44 @@ namespace Invoice.Controllers
         #region customer
         public IActionResult CustomerList()
         {
-            return View(customerRepository.All());
+            ShowCustomerViewModel InfoCustomers = new ShowCustomerViewModel
+            {
+                Customers = customerRepository.All()
+            };
+            return View(InfoCustomers);
         }
 
+
+        [HttpGet]
+        public ActionResult GetCustomerProfile()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GetCustomerProfile(ShowCustomerViewModel model)
+        {
+            Console.WriteLine("CAAAAACAAAATTTTT          " + model.Customer.Name);
+            var customer = customerRepository.Find(model.Customer.Id);
+            model.Customer = customer;
+            return View(model);
+        }
 
         [HttpGet]
         public ActionResult AddCustomerAnaf()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddCustomerAnaf(CustomerModel model)
+        {
+           
+                customerRepository.Insert(model);
+                return RedirectToAction("CustomerList");
+            
         }
 
         [HttpGet]
@@ -97,8 +127,6 @@ namespace Invoice.Controllers
 
             return View(returnedInfo);
         }
-
-
 
 
         [HttpGet]

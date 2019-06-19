@@ -1,0 +1,61 @@
+﻿@model Invoice.Core.ViewModel.ShowCustomerViewModel
+@{
+    ViewData["Title"] = "Informatii Client";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-title">
+                        <h3>Informatii Client</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-elements">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Customer.Name"></label>
+                                            <span>@Model.Customer.Name</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Customer.FirmName"></label>
+                                            <span>@Model.Customer.FirmName</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Customer.Email"></label>
+                                            <span>@Model.Customer.Email</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Customer.Notes"></label>
+                                            <span>@Model.Customer.Notes</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Customer.Phone"></label>
+                                            <span>@Model.Customer.Phone</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Customer.Address"></label>
+                                            <span>@Model.Customer.Address</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Customer.cui"></label>
+                                            <span>@Model.Customer.cui</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Customer.scpTVA"></label>
+                                            <span>@Model.Customer.scpTVA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

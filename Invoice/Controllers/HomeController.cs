@@ -53,8 +53,9 @@ namespace Invoice.Controllers
         {
             model.data = DateTime.Today.ToString("yyyy-MM-dd");
             
-            HttpResponseMessage result = await client.PostAsJsonAsync("https://webservicesp.anaf.ro/PlatitorTvaRest/api/v3/ws/tva",
-                                             new List<InfoAnafViewModel>() { model });
+            HttpResponseMessage result = await client.PostAsJsonAsync(
+            "https://webservicesp.anaf.ro/PlatitorTvaRest/api/v3/ws/tva",
+             new List<InfoAnafViewModel>() { model });
             HttpContent content = result.Content;
             string resultContent = await content.ReadAsStringAsync();
             ReturnedInfoAnafViewModel returnedInfo = new ReturnedInfoAnafViewModel();

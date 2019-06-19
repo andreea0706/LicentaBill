@@ -14,5 +14,6 @@ namespace Invoice.Core.ViewModel
 
         [Display(Name = "Data")]
         public string data { get; set; }
+
     }
 }

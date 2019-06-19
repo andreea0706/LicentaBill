@@ -13,6 +13,10 @@ namespace Invoice.Core.ViewModel
         public string cui { get; set; }
 
         [Required]
+        [Display(Name = "Nume")]
+        public string Name { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
