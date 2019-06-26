@@ -11,9 +11,10 @@ using System;
 namespace Invoice.Migrations
 {
     [DbContext(typeof(InvoiceDbContext))]
-    partial class InvoiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190624143305_supplier")]
+    partial class supplier
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,76 +55,6 @@ namespace Invoice.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customer");
-                });
-
-            modelBuilder.Entity("Invoice.Core.Entity.NirItemsModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Amount");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDelete");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("NirId");
-
-                    b.Property<double>("Price");
-
-                    b.Property<int>("Quantity");
-
-                    b.Property<int>("QuantityReceived");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NirId");
-
-                    b.ToTable("NirItems");
-                });
-
-            modelBuilder.Entity("Invoice.Core.Entity.NirModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double?>("Discount");
-
-                    b.Property<double>("GrandTotal");
-
-                    b.Property<bool>("IsDelete");
-
-                    b.Property<string>("NirCode");
-
-                    b.Property<DateTime>("NirDate");
-
-                    b.Property<string>("Notes");
-
-                    b.Property<string>("PaymentMethod");
-
-                    b.Property<string>("Status");
-
-                    b.Property<int>("SupplierId");
-
-                    b.Property<double>("Total");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("Nir");
                 });
 
             modelBuilder.Entity("Invoice.Core.Entity.ProductModel", b =>
@@ -325,22 +256,6 @@ namespace Invoice.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Invoice.Core.Entity.NirItemsModel", b =>
-                {
-                    b.HasOne("Invoice.Core.Entity.NirModel", "NirModel")
-                        .WithMany("Items")
-                        .HasForeignKey("NirId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Invoice.Core.Entity.NirModel", b =>
-                {
-                    b.HasOne("Invoice.Core.Entity.SupplierModel", "SupplierModel")
-                        .WithMany()
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Invoice.Core.Entity.SalesItemsModel", b =>

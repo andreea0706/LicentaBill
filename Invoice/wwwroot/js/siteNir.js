@@ -11,12 +11,12 @@ $(document).ready(function () {
         //get suppliers
         $.ajax({
             type: "GET",
-            url: "/Sales/GetCustomers",
+            url: "/Sales/GetSuppliers",
             datatype: "Json",
             success: function (data) {
                 $.each(data, function (index, value) {
                     console.log(value);
-                    $('#Customer').append('<option value="' + value.id + '">' + value.name+ '</option>');
+                    $('#Supplier').append('<option value="' + value.id + '">' + value.name + '</option>');
                 });
             }
         });
@@ -41,7 +41,7 @@ $(document).ready(function () {
             minLength: 1,
             select: function (event, ui) {
                 detailsTableBody = $("#detailsTable tbody");
-                var productItem = '<tr>  + <td>' + ui.item.label + '</td><td class="price">' + ui.item.value + '</td><td>' + '<input  class="qunatity" type= "number" min= "1" step= "1" value= "1"  max="99" />' + '</td><td class="amount">' + ui.item.value  + '</td><td><a data-itemId="' + 0 + '" href="#" class="deleteItem"><i class="fa fa-trash"></i></a></td></tr>';
+                var productItem = '<tr>  + <td>' + ui.item.label + '</td><td class="price">' + ui.item.value + '</td><td>' + '<input  class="qunatity" type= "number" min= "1" step= "1" value= "1"  max="99" />' + '</td><td class="amount">' + ui.item.value + '</td><td><a data-itemId="' + 0 + '" href="#" class="deleteItem"><i class="fa fa-trash"></i></a></td></tr>';
                 detailsTableBody.append(productItem);
 
                 $('#Search').val("");
@@ -63,22 +63,22 @@ $(document).ready(function () {
         var quantity = parseInt($(this).val());
         var price = parseFloat($(this).closest('tr').children('td:eq(1)').text());
         var sum = quantity * price;
-        $(this).closest('tr').children('td:eq(3)').text(sum.toFixed(2)); 
+        $(this).closest('tr').children('td:eq(3)').text(sum.toFixed(2));
         calculateSum();
 
     })
 
 
-        //save button click
+    //save button click
     $("#BtnSave").click(function (e) {
         e.preventDefault();
 
-        if (submitValidation()) {
+        //if (submitValidation()) {
 
-            var discount; 
+            var discount;
             if (parseFloat($('#Discount').val()).toFixed(2) == "NaN")
                 discount = 0;
-                
+
 
             var orderArr = [];
             orderArr.length = 0;
@@ -94,9 +94,9 @@ $(document).ready(function () {
             });
 
             var data = JSON.stringify({
-                CustomerId: $("#Customer").val(),
-                SaleCode: $("#Code").val(),
-                SalesDate: $("#Date").val(),
+                SupplierId: $("#Supplier").val(),
+                NirCode: $("#Code").val(),
+                NirDate: $("#Date").val(),
                 PaymentMethod: $("#Payment").val(),
                 Total: parseFloat($("#SubTotal").text()),
                 Notes: $("#Notes").val(),
@@ -109,11 +109,11 @@ $(document).ready(function () {
             console.log(data);
             $.when(saveOrder(data)).then(function (response) {
                 console.log(response);
-                location.href = "/Sales/index";
+                location.href = "/Sales/ListNir";
             }).fail(function (err) {
-             
+
             });
-        }
+        //}
     });
 
 
@@ -135,10 +135,10 @@ $(document).ready(function () {
             });
 
             var data = {
-                Id : parseInt($("#BtnUpdate").attr("data-sale-Id")),
-                CustomerId: parseInt($("#Customer").val()),
-                SaleCode: $("#Code").val(),
-                SalesDate: $("#Date").val(),
+                Id: parseInt($("#BtnUpdate").attr("data-sale-Id")),
+                SupplierId: parseInt($("#Supplier").val()),
+                NirCode: $("#Code").val(),
+                NirDate: $("#Date").val(),
                 PaymentMethod: $("#Payment").val(),
                 Total: parseFloat($("#SubTotal").text()),
                 Notes: $("#Notes").val(),
@@ -151,58 +151,57 @@ $(document).ready(function () {
             console.log(data);
             $.when(updateOrder(data)).then(function (response) {
                 console.log(response);
-                location.href = "/Sales/index";
+                location.href = "/Sales/ListNir";
             }).fail(function (err) {
                 console.log(err);
             });
         }
 
-     });
-  
-
-      ////total calculation
-    function calculateSum() {
-    var sum = 0;
-    // iterate through each td based on class and add the values
-    $(".amount").each(function () {
-
-        var value = $(this).text();
-        // add only if the value is number
-        if (!isNaN(value) && value.length !== 0) {
-            sum += parseFloat(value);
-        }
     });
 
-    if (sum == 0.0) {
-        $('#Discount').text("0");
-        $('#GrandTotal').text("0");
-    }
-    //console.log(sum);
-    $('#SubTotal').text(sum.toFixed(2));
-    $('#GrandTotal').val(sum.toFixed(2));
 
-    var b = parseFloat($('#Discount').val()).toFixed(2);
-    if (isNaN(b)) return;
-    var a = parseFloat($('#SubTotal').text()).toFixed(2);
-    var c = parseFloat(a - b).toFixed(2);
-    $('#GrandTotal').val(c);
-};
+    ////total calculation
+    function calculateSum() {
+        var sum = 0;
+        // iterate through each td based on class and add the values
+        $(".amount").each(function () {
+
+            var value = $(this).text();
+            // add only if the value is number
+            if (!isNaN(value) && value.length !== 0) {
+                sum += parseFloat(value);
+            }
+        });
+
+        if (sum == 0.0) {
+            $('#Discount').text("0");
+            $('#GrandTotal').text("0");
+        }
+        $('#SubTotal').text(sum.toFixed(2));
+        $('#GrandTotal').val(sum.toFixed(2));
+
+        var b = parseFloat($('#Discount').val()).toFixed(2);
+        if (isNaN(b)) return;
+        var a = parseFloat($('#SubTotal').text()).toFixed(2);
+        var c = parseFloat(a - b).toFixed(2);
+        $('#GrandTotal').val(c);
+    };
     $('.amount').each(function () {
-    calculateSum();
+        calculateSum();
     });
 
 });
 
 function submitValidation() {
-        var customer = document.getElementById("Customer").value;
-        var code = document.getElementById("Code").value;
-        var date = document.getElementById("Date").value;
-        var paymentmethod = document.getElementById("Payment").value;
-        var pStaus = document.getElementById("Status").value;
-        var total = parseFloat($("#SubTotal").text());
-        var gtotal = parseFloat($("#GrandTotal").val());
+    var supplier = document.getElementById("Supplier").value;
+    var code = document.getElementById("Code").value;
+    var date = document.getElementById("Date").value;
+    var paymentmethod = document.getElementById("Payment").value;
+    var pStaus = document.getElementById("Status").value;
+    var total = parseFloat($("#SubTotal").text());
+    var gtotal = parseFloat($("#GrandTotal").val());
 
-        if (customer == "" || pStaus == "" || code == "" || date == "" || paymentmethod == "" || (total == "" || total == 0.00 || isNaN(total)) || (gtotal == "" || gtotal == 0.00 || isNaN(gtotal))) {
+    if (supplier == "" || pStaus == "" || code == "" || date == "" || paymentmethod == "" || (total == "" || total == 0.00 || isNaN(total)) || (gtotal == "" || gtotal == 0.00 || isNaN(gtotal))) {
 
         if (pStaus == "") {
             document.getElementById("error_Status").style.display = "block";
@@ -211,11 +210,11 @@ function submitValidation() {
             document.getElementById("error_Status").style.display = "none";
         }
 
-        if (customer == "") {
-            document.getElementById("error_Customer").style.display = "block";
+        if (supplier == "") {
+            document.getElementById("error_Supplier").style.display = "block";
         }
         else {
-            document.getElementById("error_Customer").style.display = "none";
+            document.getElementById("error_Supplier").style.display = "none";
         }
         if (code == "") {
             document.getElementById("error_Code").style.display = "block";
@@ -278,19 +277,19 @@ function DiscountAmount() {
     $('#GrandTotal').val(c);
 }
 function saveOrder(data) {
-        return $.ajax({
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            type: 'POST',
-            url: "/Sales/AddSale",
-            data: data
-        });
+    return $.ajax({
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        type: 'POST',
+        url: "/Sales/AddNir",
+        data: data
+    });
 }
 function updateOrder(data) {
     return $.ajax({
         dataType: 'json',
         type: 'POST',
-        url: "/Sales/EditSale",
+        url: "/Sales/EditNir",
         data: data
     });
 }

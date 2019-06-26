@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Invoice.Core.Entity
 {
-    [Table("SalesItems")]
-    public class SalesItemsModel : BaseModel
+    [Table("NirItems")]
+    public class NirItemsModel : BaseModel
     {
         public string Name { get; set; }
 
@@ -22,9 +22,11 @@ namespace Invoice.Core.Entity
         [Required]
         public double Amount { get; set; }
 
-        [DisplayName("Sale")]
-        [ForeignKey("SalesModel")]
-        public int SalesId { get; set; }
-        public SalesModel SalesModel { get; set; }
+        public int QuantityReceived { get; set; }
+
+        [DisplayName("Nir")]
+        [ForeignKey("NirModel")]
+        public int NirId { get; set; }
+        public NirModel NirModel { get; set; }
     }
 }

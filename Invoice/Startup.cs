@@ -66,7 +66,10 @@ namespace Invoice
 
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<ISupplierRepository, SupplierRepository>();
+            services.AddTransient<INirRepository, NirRepository>();
             services.AddTransient<ISaleRepository, SaleRepository>();
+            services.AddTransient<INirItemRepository, NirItemRepository>();
             services.AddTransient<ISaleItemRepository, SaleItemRepository>();
             services.AddTransient<IStoreSettingRepository, StoreSettingRepository>();
             services.AddTransient<IUserRepository, UserRepository>();

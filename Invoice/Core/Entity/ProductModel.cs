@@ -24,6 +24,9 @@ namespace Invoice.Core.Entity
         [DisplayName("Pret")]
         public double Price { get; set; }
 
+        [DisplayName("Stoc")]
+        public int Stoc { get; set; }
+
         [DisplayName("Descriere")]
         public string Description{ get; set; }
 

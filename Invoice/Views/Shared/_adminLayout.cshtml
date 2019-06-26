@@ -73,7 +73,7 @@
                         <li class="nav-devider"></li>
                         <li class="nav-label" style="color: black;">Acasa</li>
                         <li>
-                            <a href="@Url.Action("Index", "Admin")" aria-expanded="false" style="color: black;"><i class="fa fa-tachometer" style="color: black;"></i><span class="hide-menu" >Dashboard</span></a>
+                            <a href="@Url.Action("Index", "Admin")" aria-expanded="false" style="color: black;"><i class="fa fa-tachometer" style="color: black;"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li class="nav-label" style="color: black;">Functionalitati</li>
                         <li>
@@ -83,7 +83,13 @@
                                 <li><a href="@Url.Action("CustomerList", "Admin")" style="color: black;">Toti Clientii</a></li>
                             </ul>
                         </li>
-
+                        <li>
+                            <a class="has-arrow" href="#" aria-expanded="false" style="color: black;"><i class="fa fa-user-plus" style="color: black;"></i><span class="hide-menu">Furnizori</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="@Url.Action("AddSupplier", "Admin")" style="color: black;">Furnizor Nou</a></li>
+                                <li><a href="@Url.Action("SupplierList", "Admin")" style="color: black;">Toti Furnizorii</a></li>
+                            </ul>
+                        </li>
                         <li>
                             <a class="has-arrow" href="#" aria-expanded="false" style="color: black;"><i class="fa fa-qrcode" style="color: black;"></i><span class="hide-menu">Produse </span></a>
                             <ul aria-expanded="false" class="collapse">
@@ -98,6 +104,14 @@
                                 <li><a href="@Url.Action("Index","Sales")" style="color: black;">Lista de facturi</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a class="has-arrow  " href="#" aria-expanded="false" style="color: black;"><i class="fa fa-cart-plus" style="color: black;"></i><span class="hide-menu">NIR-uri</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="@Url.Action("AddNir","Sales")" style="color: black;">Inregistrare NIR</a></li>
+                                <li><a href="@Url.Action("ListNir","Sales")" style="color: black;">Lista NIR-uri</a></li>
+                            </ul>
+                        </li>
+
                         <li>
                             <a style="color: black;" href="@Url.Action("SalesReport", "Sales")" aria-expanded="false"><i class="fa fa-print" style="color: black;"></i><span class="hide-menu">Rapoarte Vanzari</span></a>
                         </li>

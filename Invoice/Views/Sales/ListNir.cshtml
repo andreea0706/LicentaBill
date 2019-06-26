@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Invoice.Core.Entity.SalesModel>
+﻿@model IEnumerable<Invoice.Core.Entity.NirModel>
 @{
-    ViewData["Title"] = "Lista Vanzari";
+    ViewData["Title"] = "Lista Nota Intrare Receptie";
     Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
 
@@ -31,8 +31,8 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@item.SaleCode</td>
-                                            <td>@item.SalesDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@item.NirCode</td>
+                                            <td>@item.NirDate.ToString("dd/MM/yyyy")</td>
                                             <td>@item.Total</td>
                                             <td>@item.Discount</td>
                                             <td>@item.GrandTotal</td>
@@ -49,14 +49,12 @@
                                                 }
                                             </td>
                                             <td>
-                                                <a href="@Url.Action("SaleInvoice","Sales", new {saleId = item.Id,style=1})" title="Invoice 1" class="btn btn-icon btn-primary btn-xs m-b-5"><i class="fa fa-print"> </i> </a>
+                                                <a href="@Url.Action("NirDoc","Sales", new {nirId = item.Id, style=1})" title="Invoice 1" class="btn btn-icon btn-primary btn-xs m-b-5"><i class="fa fa-print"> </i> </a>
 
-                                                <a href="@Url.Action("SaleInvoice","Sales", new {saleId = item.Id,style=2})" title="Invoice 2" class="btn btn-icon btn-primary btn-xs m-b-5"><i class="fa fa-print"> </i> </a>
-
-                                                <a href="@Url.Action("EditSale", "Sales", new {saleId= item.Id})" title="Edit" class="btn btn-icon btn-warning btn-xs m-b-5">
+                                                <a href="@Url.Action("EditNir", "Sales", new {nirId= item.Id})" title="Edit" class="btn btn-icon btn-warning btn-xs m-b-5">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a href="@Url.Action("DeleteSale", "Sales", new {saleId = item.Id})"  title="delete" onclick="return confirm('Sigur doresti sa stergi aceasta factura?')" class="btn btn-icon btn-danger btn-xs m-b-5">
+                                                <a href="@Url.Action("DeleteNir", "Sales", new {nirId = item.Id})" title="delete" onclick="return confirm('Sigur doresti sa stergi aceasta factura?')" class="btn btn-icon btn-danger btn-xs m-b-5">
                                                     <i class="fa fa-remove"></i>
                                                 </a>
                                             </td>

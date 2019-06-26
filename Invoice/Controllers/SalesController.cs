@@ -20,13 +20,25 @@ namespace Invoice.Controllers
     {
         private readonly ICustomerRepository customerRepository;
         private readonly ISaleRepository saleRepository;
+        private readonly INirRepository nirRepository;
+        private readonly ISupplierRepository supplierRepository;
         private readonly ISaleItemRepository saleItemRepository;
+        private readonly INirItemRepository nirItemRepository;
         private readonly IStoreSettingRepository storeSettingRepository;
         private readonly IConfiguration configuration;
 
-        public SalesController(ICustomerRepository customerRepository, ISaleRepository saleRepository,
-            ISaleItemRepository saleItemRepository, IStoreSettingRepository storeSettingRepository, IConfiguration configuration)
+        public SalesController(ICustomerRepository customerRepository,
+                                ISaleRepository saleRepository,
+                                INirRepository nirRepository,
+                                INirItemRepository nirItemRepository,
+                                ISupplierRepository supplierRepository,
+                                ISaleItemRepository saleItemRepository,
+                                IStoreSettingRepository storeSettingRepository,
+                                IConfiguration configuration)
         {
+            this.nirRepository = nirRepository;
+            this.nirItemRepository = nirItemRepository;
+            this.supplierRepository = supplierRepository;
             this.configuration = configuration;
             this.customerRepository = customerRepository;
             this.saleRepository = saleRepository;
@@ -39,6 +51,123 @@ namespace Invoice.Controllers
         {
             return View(saleRepository.All());
         }
+
+        public IActionResult ListNir()
+        {
+            return View(nirRepository.All());
+        }
+
+
+        [HttpGet]
+        public IActionResult AddNir()
+        {
+            ViewBag.suppliers = supplierRepository.GetAllForDropDown();
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult AddNir([FromBody] NirModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                nirRepository.Insert(model);
+                return Json(new { error = false, message = "Sales saved successfully" });
+            }
+            return Json(new { error = true, message = "failed to save Sales" });
+        }
+
+
+        [HttpGet]
+        public IActionResult EditNir(int nirId)
+        {
+            return View(model: nirId);
+        }
+        [HttpPost]
+        public IActionResult EditNir(SalesModel model)
+        {
+            if (model != null)
+            {
+                var items = nirItemRepository.All().Where(x => x.NirId == model.Id).ToList();
+                if (items.Any())
+                {
+                    foreach (var item in items)
+                    {
+                        nirItemRepository.Delete(item);
+                    }
+                }
+
+                var nir = nirRepository.Find(model.Id);
+                nir.Notes = model.Notes;
+                nir.PaymentMethod = model.PaymentMethod;
+                nir.NirCode = model.SaleCode;
+                nir.SupplierId = model.CustomerId;
+                nir.Total = model.Total;
+                nir.NirDate = model.SalesDate;
+                nir.Status = model.Status;
+                nir.Discount = model.Discount;
+                nir.GrandTotal = model.GrandTotal;
+
+                //add again
+                foreach (var item in model.Items)
+                {
+                    nir.Items.Add(new NirItemsModel
+                    {
+                        Price = item.Price,
+                        Amount = item.Amount,
+                        Quantity = item.Quantity,
+                        Name = item.Name
+                    });
+                }
+                nirRepository.Update(nir, model.Id);
+                return Json(new { error = false, message = "Nota intrare Receptie actualizata cu succes!" });
+            }
+            return Json(new { error = true, message = "Esuare actualizare Nota Intrare Receptie!" });
+        }
+
+        public IActionResult DeleteNir(int nirId)
+        {
+            var item = this.nirRepository.Find(nirId);
+            nirRepository.Delete(item);
+            return RedirectToAction("index");
+        }
+
+
+        public ActionResult NirDoc(int saleId, int style)
+        {
+            if (storeSettingRepository.All().Count() == 0)
+            {
+                TempData["Msg"] = "Setup store setting first then print sale invoice";
+                return RedirectToAction("Index");
+            }
+            var store = storeSettingRepository.All().FirstOrDefault();
+
+            var sale = saleRepository.All().Include(x => x.CustomerModel).SingleOrDefault(x => x.Id == saleId);
+            sale.Items = saleItemRepository.All().Where(x => x.SalesId == saleId).ToList();
+            if (sale != null)
+            {
+                var sales = new SaleReportViewModel
+                {
+                    company = store,
+                    Sales = sale
+                };
+                if (style == 1)
+                {
+                    SalesReport paymentReport = new SalesReport(configuration);
+                    byte[] bytes = paymentReport.CreateReport(sales);
+                    return File(bytes, "application/pdf");
+                }
+                if (style == 2)
+                {
+                    SalesReportSmall paymentReport = new SalesReportSmall();
+                    byte[] bytes = paymentReport.CreateReport(sales);
+                    return File(bytes, "application/pdf");
+                }
+            }
+            return RedirectToAction("index");
+        }
+
+
 
         [HttpGet]
         public IActionResult AddSale()
@@ -154,26 +283,15 @@ namespace Invoice.Controllers
             return RedirectToAction("index");
         }
 
-        [HttpGet]
-        public JsonResult GetSales(int saleId)
-        {
-            try
-            {
-                SalesModel sales = saleRepository.All().FirstOrDefault(x => x.Id == saleId);
-                sales.Items = saleItemRepository.All().Where(x => x.SalesId == sales.Id).ToList();
-                //SalesItemsModel a = new SalesItemsModel { Name = "abc", Amount = 2.5, Id = 1, IsDelete = false, Price = 2.5, Quantity = 1, SalesId = 5};
-                //sales.Items.Add(a);
-                return Json(sales);
-            }
-            catch (Exception e){
-                return Json(e.ToString());
-            }
-           
-        }
 
         public JsonResult GetCustomers()
         {
             return Json(customerRepository.All());
+        }
+
+        public JsonResult GetSuppliers()
+        {
+            return Json(supplierRepository.All());
         }
     }
 }

@@ -24,16 +24,19 @@ namespace Invoice.Controllers
     public class AdminController : Controller
     {
         private readonly ICustomerRepository customerRepository;
+        private readonly ISupplierRepository supplierRepository;
         private readonly IProductRepository _productRepository;
         private readonly IStoreSettingRepository storeSettingRepository;
         private readonly ISaleRepository saleRepository;
         private static readonly HttpClient client = new HttpClient();
 
         public AdminController(ICustomerRepository customerRepository,
-            IProductRepository productRepository, IStoreSettingRepository storeSettingRepository,
-            ISaleRepository saleRepository)
+                                ISupplierRepository supplierRepository,
+                                IProductRepository productRepository, 
+                                IStoreSettingRepository storeSettingRepository,
+                                ISaleRepository saleRepository)
         {
-
+            this.supplierRepository = supplierRepository;
             this.customerRepository = customerRepository;
             _productRepository = productRepository;
             this.storeSettingRepository = storeSettingRepository;
@@ -43,6 +46,7 @@ namespace Invoice.Controllers
         {
             var dashboard= new DashboardViewModel
             {
+
                 Customers = customerRepository.All().Count(),
                 Products = _productRepository.All().Count(),
                 TotalSales = saleRepository.All().Count(),
@@ -51,6 +55,61 @@ namespace Invoice.Controllers
             };
             return View(dashboard);
         }
+      
+        [HttpGet]
+        public ActionResult AddSupplier()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddSupplier(SupplierModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                supplierRepository.Insert(model);
+                return RedirectToAction("SupplierList");
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EditSupplier(int supplierId)
+        {
+            var supplier = supplierRepository.Find(supplierId);
+            return View(supplier);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditSupplier(SupplierModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            supplierRepository.Update(model, model.Id);
+            return RedirectToAction("SupplierList");
+        }
+
+        public ActionResult DeleteSupplier(int supplierId)
+        {
+            var supplier = supplierRepository.Find(supplierId);
+            if (supplier != null)
+            {
+                supplierRepository.Delete(supplier);
+                return RedirectToAction("SupplierList");
+            }
+            return RedirectToAction("SupplierList");
+        }
+
+
+        public IActionResult SupplierList()
+        {
+            var suppliers = supplierRepository.All();
+            return View(suppliers);
+        }
+
 
 
         #region customer
@@ -73,7 +132,6 @@ namespace Invoice.Controllers
         [HttpPost]
         public ActionResult GetCustomerProfile(ShowCustomerViewModel model)
         {
-            Console.WriteLine("CAAAAACAAAATTTTT          " + model.Customer.Name);
             var customer = customerRepository.Find(model.Customer.Id);
             model.Customer = customer;
             return View(model);
@@ -129,6 +187,7 @@ namespace Invoice.Controllers
         }
 
 
+
         [HttpGet]
         public ActionResult AddCustomer()
         {
@@ -153,6 +212,7 @@ namespace Invoice.Controllers
             var customer = customerRepository.Find(customerId);
             return View(customer);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditCustomer(CustomerModel model)
@@ -366,6 +426,7 @@ namespace Invoice.Controllers
         {
             return Json(_productRepository.All().Where(x => x.Name.ToLower().Contains(query.ToLower())));
         }
+
         #endregion
 
     }

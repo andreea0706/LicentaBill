@@ -1,0 +1,78 @@
+﻿@model Invoice.Core.Entity.SupplierModel
+@{
+    ViewData["Title"] = "Adauga Furnizor";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h2>Furnizor Nou</h2>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card-body">
+                        <div class="basic-elements">
+                            <form asp-controller="admin" asp-action="AddSupplier" method="post">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label asp-for="Name"></label>
+                                            <div>
+                                                <input asp-for="Name" type="text" class="form-control" required style="display: inline-block; width:250px; border-width:thin; border-bottom-color:black;" />
+                                            </div>
+                                            <span asp-validation-for="Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Email"></label>
+                                            <div>
+                                                <input asp-for="Email" type="email" class="form-control" required style="display: inline-block; width:250px; border-width:thin; border-bottom-color:black;" />
+                                            </div>
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-success"> Save Changes </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+                                            <label asp-for="Phone"></label>
+                                            <div>
+                                                <input asp-for="Phone" type="text" class="form-control" required style="display: inline-block; width:250px; border-width:thin; border-bottom-color:black;" />
+                                            </div>
+                                            <span asp-validation-for="Phone" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Address"></label>
+                                            <div>
+                                                <input asp-for="Address" type="text" class="form-control" required style="display: inline-block; width:350px; border-width:thin; border-bottom-color:black;" />
+                                            </div>
+                                            <span asp-validation-for="Address" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Notes"></label>
+                                            <div>
+                                                <input asp-for="Notes" type="text" class="form-control" required style="display: inline-block; width:350px; border-width:thin; border-bottom-color:black;" />
+                                            </div>
+                                            <span asp-validation-for="Notes" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+</div>

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Adauga Vanzare";
+    ViewData["Title"] = "Inregistrare Nota Intrare Receptie";
     Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
 
@@ -37,35 +37,35 @@
                             <div class="form-inline">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="Name" style="font-size:20px;">Client &nbsp  </label>
-                                        <select id="Customer"
+                                        <label for="Name" style="font-size:20px;">Furnizor &nbsp  </label>
+                                        <select id="Supplier"
                                                 class="form-control"
                                                 onchange="blankme(this.id)"
                                                 style="border-width:thin;
                                                 border-color:black;">
-                                            <option value="">Selecteaza Client</option>
+                                            <option value="">Selecteaza Furnizor</option>
                                         </select>
-                                        <small id="error_Customer" class="form-text error_msg">Selecteaza cumparatorului din lista</small>
+                                        <small id="error_Supplier" class="form-text error_msg">Selecteaza un furnizor</small>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Code" style="font-size:20px; border-width:thin; border-color:black;"> Serie  &nbsp</label>
                                         @Html.TextBox("Code", null, new { @class = "form-control",
-                                                                           @placeholder = "Serie Factura",
+                                                                           @placeholder = "Serie Document",
                                                                            onkeyup = "blankme(this.id)",
                                                                            @style = "border-width:thin; border-color:black;" })
-                                        <small id="error_Code" class="form-text error_msg col-md-offset-2 "> Seria Facturii este necesara!</small>
+                                        <small id="error_Code" class="form-text error_msg col-md-offset-2 "> Seria documentului trebuie completata!</small>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Date" style="font-size:20px;"> Data  &nbsp</label>
                                         @Html.TextBox("Date", null, new { @class = "form-control mydatepicker",
-                                                                                   @placeholder = "Selecteaza Data Vanzarii",
+                                                                                   @placeholder = "Data Receptiei",
                                                                                    onchange = "blankme(this.id)",
                                                                                    @style = "border-width:thin; border-color:black;" })
-                                        <small id="error_Date" class="form-text error_msg col-md-offset-2 ">Data Vanzarii este necesara!</small>
+                                        <small id="error_Date" class="form-text error_msg col-md-offset-2 ">Completeaza data receptiei!</small>
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                             <table class="table table-hover col-md-12" id="detailsTable">
                                 <thead>
                                     <tr>
-                                       
+
                                         <th style="width:280px">Nume Produs</th>
                                         <th>Unit</th>
                                         <th>Cantitate</th>
@@ -95,7 +95,7 @@
                                 <tbody id="itemDetails"></tbody>
                                 <tfoot>
                                     <tr>
-                                        
+
                                         <td></td>
                                         <td></td>
                                         <td> <strong> Total:</strong> </td>
@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="GrandTotal">Total : </label>
-                                        <input type="text" id="GrandTotal" class="form-control" readonly style = "border-width:thin; border-color:black;" />
+                                        <input type="text" id="GrandTotal" class="form-control" readonly style="border-width:thin; border-color:black;" />
                                         <small id="error_GrandTotal" class="form-text error_msg">Total is empty</small>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@
 
                             <div class="form-horizontal">
                                 <label> </label>
-                                <input id="BtnSave" class="btn btn-info col-md-3 pull-right" type="submit" value="Salveaza Factura" />
+                                <input id="BtnSave" class="btn btn-info col-md-3 pull-right" type="submit" value="Salveaza" />
                             </div>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
 </div>
 
 @section scripts {
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/siteNir.js" asp-append-version="true"></script>
     <script type="text/javascript">
 
     </script>

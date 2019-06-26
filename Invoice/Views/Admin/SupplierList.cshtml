@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Invoice.Core.Entity.SupplierModel>
+@{
+    ViewData["Title"] = "Lista Furnizori";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Lista Furnizori</h3>
+                        <div class="table-responsive m-t-40">
+                            <table id="example23" class="display nowrap table table-hover  table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Nr. Crt.</th>
+                                        <th>Nume</th>
+                                        <th>Email</th>
+                                        <th>Numar Telefon</th>
+                                        <th>Detalii</th>
+                                        <th>Optiuni</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Id</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.Phone</td>
+                                            <td>@item.Notes</td>
+                                            <td>
+                                                <a href="@Url.Action("EditSupplier", "Admin", new {supplierId = item.Id})" class="btn btn-icon btn-warning btn-xs m-b-5">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href="@Url.Action("DeleteSupplier", "Admin", new {supplierId = item.Id})" onclick="return confirm('Esti sigur ca vrei sa stergi acest furnizor?')" class="btn btn-icon btn-danger btn-xs m-b-5">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

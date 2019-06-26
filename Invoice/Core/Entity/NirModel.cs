@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Invoice.Core.Entity
 {
-    [Table("Sales")]
-    public class SalesModel : BaseModel
+    [Table("Nir")]
+    public class NirModel : BaseModel
     {
         [Required]
-        [DisplayName("Sales Date")]
-        public DateTime SalesDate { get; set; }
-        public string SaleCode { get; set; }
+        [DisplayName("Data")]
+        public DateTime NirDate { get; set; }
+        public string NirCode { get; set; }
         public string Notes { get; set; }
         [Required]
         public Double Total { get; set; }
@@ -26,15 +26,15 @@ namespace Invoice.Core.Entity
         [DisplayName("Payment Method")]
         public string PaymentMethod { get; set; }
 
-        [DisplayName("CustomerId")]
-        [ForeignKey("CustomerModel")]
-        public int CustomerId { get; set; }
-        public CustomerModel CustomerModel { get; set; }
+        [DisplayName("SupplierId")]
+        [ForeignKey("SupplierModel")]
+        public int SupplierId { get; set; }
+        public SupplierModel SupplierModel { get; set; }
 
-        public ICollection<SalesItemsModel> Items { get; set; }
-        public SalesModel()
+        public ICollection<NirItemsModel> Items { get; set; }
+        public NirModel()
         {
-            Items = new List<SalesItemsModel>();
+            Items = new List<NirItemsModel>();
         }
     }
- }
+}

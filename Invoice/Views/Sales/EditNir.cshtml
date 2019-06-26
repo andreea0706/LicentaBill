@@ -106,11 +106,11 @@
 
                                     <div class="form-group">
                                         <label for="Date"> Metoda plata : </label>
-                                            @Html.DropDownList("Payment", new List<SelectListItem>
-                                                {
-                                                    new SelectListItem() {Text = "Cash", Value="Cash"},
-                                                    new SelectListItem() {Text = "Check", Value="Check"},
-                                                }, "Select Payment", new { @class = "form-control", onchange = "blankme(this.id)" })
+                                        @Html.DropDownList("Payment", new List<SelectListItem>
+                                            {
+                                                new SelectListItem() {Text = "Cash", Value="Cash"},
+                                                new SelectListItem() {Text = "Check", Value="Check"},
+                                            }, "Select Payment", new { @class = "form-control", onchange = "blankme(this.id)" })
                                         <small id="error_Payment" class="form-text error_msg">Selecteaza o metoda de plata</small>
                                     </div>
 
@@ -191,7 +191,7 @@
                 $("#Discount").val(res.discount);
                 $("#GrandTotal").val(res.grandTotal);
                 $.each(res.items, function (i, v) {
-                    detArr.push('<tr>  + <td>' + v.name + '</td><td>' + v.price + '</td><td>' + '<input  class="qunatity" type= "number" min= "1" step= "1" value= '+ v.quantity +'  max="99" />'  + '</td><td class="amount">' + v.amount + '</td><td><a data-itemId="' + v.id + '" href="#" class="deleteItem"><i class="fa fa-trash"></i></a></td></tr>');
+                    detArr.push('<tr>  + <td>' + v.name + '</td><td>' + v.price + '</td><td>' + '<input  class="qunatity" type= "number" min= "1" step= "1" value= ' + v.quantity + '  max="99" />' + '</td><td class="amount">' + v.amount + '</td><td><a data-itemId="' + v.id + '" href="#" class="deleteItem"><i class="fa fa-trash"></i></a></td></tr>');
                 });
                 $("#detailsTable tbody").append(detArr);
 

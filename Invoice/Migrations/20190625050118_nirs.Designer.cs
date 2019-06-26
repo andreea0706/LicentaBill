@@ -11,9 +11,10 @@ using System;
 namespace Invoice.Migrations
 {
     [DbContext(typeof(InvoiceDbContext))]
-    partial class InvoiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190625050118_nirs")]
+    partial class nirs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,38 +55,6 @@ namespace Invoice.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customer");
-                });
-
-            modelBuilder.Entity("Invoice.Core.Entity.NirItemsModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Amount");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDelete");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("NirId");
-
-                    b.Property<double>("Price");
-
-                    b.Property<int>("Quantity");
-
-                    b.Property<int>("QuantityReceived");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NirId");
-
-                    b.ToTable("NirItems");
                 });
 
             modelBuilder.Entity("Invoice.Core.Entity.NirModel", b =>
@@ -168,11 +137,17 @@ namespace Invoice.Migrations
 
                     b.Property<bool>("IsDelete");
 
+                    b.Property<int>("MeasureUnit");
+
                     b.Property<string>("Name");
+
+                    b.Property<int?>("NirModelId");
 
                     b.Property<double>("Price");
 
                     b.Property<int>("Quantity");
+
+                    b.Property<int>("QuantityReceived");
 
                     b.Property<int>("SalesId");
 
@@ -180,6 +155,8 @@ namespace Invoice.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NirModelId");
 
                     b.HasIndex("SalesId");
 
@@ -327,14 +304,6 @@ namespace Invoice.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Invoice.Core.Entity.NirItemsModel", b =>
-                {
-                    b.HasOne("Invoice.Core.Entity.NirModel", "NirModel")
-                        .WithMany("Items")
-                        .HasForeignKey("NirId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Invoice.Core.Entity.NirModel", b =>
                 {
                     b.HasOne("Invoice.Core.Entity.SupplierModel", "SupplierModel")
@@ -345,6 +314,10 @@ namespace Invoice.Migrations
 
             modelBuilder.Entity("Invoice.Core.Entity.SalesItemsModel", b =>
                 {
+                    b.HasOne("Invoice.Core.Entity.NirModel")
+                        .WithMany("Items")
+                        .HasForeignKey("NirModelId");
+
                     b.HasOne("Invoice.Core.Entity.SalesModel", "SalesModel")
                         .WithMany("Items")
                         .HasForeignKey("SalesId")
