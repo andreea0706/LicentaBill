@@ -1,6 +1,6 @@
 ﻿@model Invoice.Core.Entity.ProductModel
 @{
-    ViewData["Title"] = "EditProduct";
+    ViewData["Title"] = "Editare Produs";
     Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
 
@@ -23,26 +23,31 @@
 
                                         <div class="form-group">
                                             <label asp-for="Code"></label>
-                                            <input type="text" asp-for="Code" class="form-control" placeholder="Enter Product Code">
+                                            <input type="text" asp-for="Code" class="form-control" placeholder="Adauga Cod Produs">
                                             <span asp-validation-for="Code" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Name"></label>
-                                            <input type="text" asp-for="Name" class="form-control" placeholder="Enter Product Name">
+                                            <input type="text" asp-for="Name" class="form-control" placeholder="Adauga Nume Produs">
                                             <span asp-validation-for="Name" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
+                                            <label asp-for="Stoc"></label>
+                                            <input asp-for="Stoc" class="form-control" type="number" placeholder="Adauga Descriere Produs">
+                                            <span asp-validation-for="Stoc" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
                                             <label asp-for="Price"></label>
-                                            <input asp-for="Price" class="form-control" type="text" placeholder="Enter Price">
+                                            <input asp-for="Price" class="form-control" type="text" placeholder="Adauga Pret Produs">
                                             <span asp-validation-for="Price" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="Description"></label>
-                                            <input asp-for="Description" class="form-control" type="text" placeholder="Enter Description">
+                                            <input asp-for="Description" class="form-control" type="text" placeholder="Adauga Descriere">
                                             <span asp-validation-for="Description" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-success"> Save Changes </button>
+                                            <button type="submit" class="btn btn-success"> Salveaza </button>
                                         </div>
 
                                     </div>

@@ -49,15 +49,24 @@
                                                 }
                                             </td>
                                             <td>
-                                                <a href="@Url.Action("SaleInvoice","Sales", new {saleId = item.Id,style=1})" title="Invoice 1" class="btn btn-icon btn-primary btn-xs m-b-5"><i class="fa fa-print"> </i> </a>
 
-                                                <a href="@Url.Action("SaleInvoice","Sales", new {saleId = item.Id,style=2})" title="Invoice 2" class="btn btn-icon btn-primary btn-xs m-b-5"><i class="fa fa-print"> </i> </a>
-
-                                                <a href="@Url.Action("EditSale", "Sales", new {saleId= item.Id})" title="Edit" class="btn btn-icon btn-warning btn-xs m-b-5">
-                                                    <i class="fa fa-edit"></i>
+                                                <a href="@Url.Action("SendEmail","Sales", new {saleId = item.Id})" title="Trimite Email" style="padding:5px;">
+                                                    <i class="fa fa-envelope" style="font-size:15px;"></i>
                                                 </a>
-                                                <a href="@Url.Action("DeleteSale", "Sales", new {saleId = item.Id})"  title="delete" onclick="return confirm('Sigur doresti sa stergi aceasta factura?')" class="btn btn-icon btn-danger btn-xs m-b-5">
-                                                    <i class="fa fa-remove"></i>
+
+                                                <a href="@Url.Action("SaleInvoice","Sales", new {saleId = item.Id,style=1})" title="Model Factura 1" style="padding:5px;">
+                                                    <i class="fa fa-file" style="font-size:15px;"></i>
+                                                </a>
+
+                                                <a href="@Url.Action("SaleInvoice","Sales", new {saleId = item.Id,style=2})" title="Model Factura 2" style="padding:5px;">
+                                                    <i class="fa fa-file" style="font-size:15px;"></i>
+                                                </a>
+
+                                                <a href="@Url.Action("EditSale", "Sales", new {saleId= item.Id})" title="Editeaza" style="padding:5px;">
+                                                    <i class="fa fa-edit" style="font-size:15px;"></i>
+                                                </a>
+                                                <a href="@Url.Action("DeleteSale", "Sales", new {saleId = item.Id})" title="Sterge" style="padding:5px;" onclick="return confirm('Sigur doresti sa stergi aceasta factura?')">
+                                                    <i class="fa fa-trash" style="font-size:15px;"></i>
                                                 </a>
                                             </td>
                                         </tr>

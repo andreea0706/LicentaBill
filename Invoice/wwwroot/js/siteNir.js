@@ -135,7 +135,7 @@ $(document).ready(function () {
             });
 
             var data = {
-                Id: parseInt($("#BtnUpdate").attr("data-sale-Id")),
+                Id: parseInt($("#BtnUpdate").attr("data-nir-Id")),
                 SupplierId: parseInt($("#Supplier").val()),
                 NirCode: $("#Code").val(),
                 NirDate: $("#Date").val(),

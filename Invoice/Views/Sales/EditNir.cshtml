@@ -1,6 +1,6 @@
 ﻿@model int
 @{
-    ViewData["Title"] = "Editeaza Vanzarea";
+    ViewData["Title"] = "Editeaza Nota Intrare Receptie";
     Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
 
@@ -40,25 +40,25 @@
                             <div class="form-inline">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="Name">Client &nbsp  </label>
-                                        <select id="Customer" class="form-control" onchange="blankme(this.id)">
-                                            <option value="">Select Customer</option>
+                                        <label for="Name">Furnizor &nbsp  </label>
+                                        <select id="Supplier" class="form-control" onchange="blankme(this.id)">
+                                            <option value="">Selecteaza Furnizor</option>
                                         </select>
-                                        <small id="error_Customer" class="form-text error_msg">Selecteaza client din lista de mai jos</small>
+                                        <small id="error_Supplier" class="form-text error_msg">Selecteaza furnizor din lista de mai jos</small>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="Code"> Seria  &nbsp</label>
-                                        @Html.TextBox("Code", null, new { @class = "form-control", @placeholder = "Enter Sale No", onkeyup = "blankme(this.id)" })
-                                        <small id="error_Code" class="form-text error_msg col-md-offset-2 "> Seria facturii trebuie completata!</small>
+                                        <label for="Code"> Serie NIR  &nbsp</label>
+                                        @Html.TextBox("Code", null, new { @class = "form-control", @placeholder = "Serie Document", onkeyup = "blankme(this.id)" })
+                                        <small id="error_Code" class="form-text error_msg col-md-offset-2 "> Seria documentului trebuie completata!</small>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Date"> Data  &nbsp</label>
-                                        @Html.TextBox("Date", null, new { @class = "form-control mydatepicker", @placeholder = "Select Sale Date ", onchange = "blankme(this.id)" })
-                                        <small id="error_Date" class="form-text error_msg col-md-offset-2 ">Data vanzarii trebuie completata!</small>
+                                        @Html.TextBox("Date", null, new { @class = "form-control mydatepicker", @placeholder = "Data emitere ", onchange = "blankme(this.id)" })
+                                        <small id="error_Date" class="form-text error_msg col-md-offset-2 ">Data receptiei trebuie completata!</small>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                             <label class="col-md-2">Cautare Produs</label>
                             <div class="input-group input-group-default col-md-8">
                                 <span class="input-group-btn"><button class="btn btn-primary" type="submit"><i class="ti-search"></i></button></span>
-                                <input type="text" placeholder="Search Product" name="Search" id="Search" class="form-control">
+                                <input type="text" placeholder="Cautare Produs" name="Search" id="Search" class="form-control">
                             </div>
 
                             <br />
@@ -97,7 +97,7 @@
                                 </tfoot>
                             </table>
 
-                            <small id="error_SubTotal" class="form-text error_msg">Atleast add one item</small>
+                            <small id="error_SubTotal" class="form-text error_msg">Adauga cel putin un produs</small>
                             <br />
                             <br />
 
@@ -126,7 +126,7 @@
 
                                     <div class="form-group">
                                         <label for="Notes"> Detalii: </label>
-                                        @Html.TextArea("Notes", new { @class = "form-control", @rows = "5", @placeholder = "Enter Notes" })
+                                        @Html.TextArea("Notes", new { @class = "form-control", @rows = "5", @placeholder = "Adauga Detalii" })
                                     </div>
                                 </div>
 
@@ -134,20 +134,20 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Discount"> Discount : </label>
-                                        @Html.TextBox("Discount", null, new { @class = "form-control", @Value = 0, @type = "number", @placeholder = "Discount Amount ", onchange = "DiscountAmount()" })
+                                        @Html.TextBox("Discount", null, new { @class = "form-control", @Value = 0, @type = "number", @placeholder = "Discount ", onchange = "DiscountAmount()" })
                                         <small id="error_Discount" class="form-text error_msg">Discount can't be empty</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="GrandTotal"> Grand Total : </label>
                                         <input type="text" id="GrandTotal" class="form-control" readonly />
-                                        <small id="error_GrandTotal" class="form-text error_msg">Total is empty</small>
+                                        <small id="error_GrandTotal" class="form-text error_msg">Total factura 0</small>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-horizontal">
                                 <label> </label>
-                                <input id="BtnUpdate" data-sale-Id="@Model" class="btn btn-success col-md-3 pull-right" type="submit" value="Update Sale" />
+                                <input id="BtnUpdate" data-nir-Id="@Model" class="btn btn-success col-md-3 pull-right" type="submit" value="Update Sale" />
                             </div>
                         </div>
                     </div>
@@ -164,24 +164,24 @@
 
 
 @section scripts {
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/siteNir.js" asp-append-version="true"></script>
     <script type="text/javascript">
-        function getSale(id) {
+        function getNir(id) {
             return $.ajax({
                 type: 'GET',
                 datatype: "Json",
-                url: "/Sales/GetSales",
-                data: "saleId=" + id
+                url: "/Sales/GetNir",
+                data: "nirId=" + id
             });
         }
-        var saleId = $("#BtnUpdate").attr("data-sale-Id");
+        var saleId = $("#BtnUpdate").attr("data-nir-Id");
         $('#masterSale').ready(function () {
-            $.when(getSale(saleId)).then(function (res) {
+            $.when(getNir(saleId)).then(function (res) {
                 console.log(res);
                 var detArr = [];
                 $("#Code").val(res.saleCode);
-                $("#Customer").val(res.customerId);
-                var date = new Date(res.salesDate);
+                $("#Supplier").val(res.supplierId);
+                var date = new Date(res.nirDate);
                 var ret = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
                 $("#Date").val(ret);
                 $("#Notes").val(res.notes);
@@ -194,9 +194,6 @@
                     detArr.push('<tr>  + <td>' + v.name + '</td><td>' + v.price + '</td><td>' + '<input  class="qunatity" type= "number" min= "1" step= "1" value= ' + v.quantity + '  max="99" />' + '</td><td class="amount">' + v.amount + '</td><td><a data-itemId="' + v.id + '" href="#" class="deleteItem"><i class="fa fa-trash"></i></a></td></tr>');
                 });
                 $("#detailsTable tbody").append(detArr);
-
-                //$("#orderMasterId").val(res.result.MasterId);
-
             }).fail(function (err) {
                 console.log(err);
             });

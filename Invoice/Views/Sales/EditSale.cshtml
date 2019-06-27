@@ -50,14 +50,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Code"> Seria  &nbsp</label>
-                                        @Html.TextBox("Code", null, new { @class = "form-control", @placeholder = "Enter Sale No", onkeyup = "blankme(this.id)" })
+                                        @Html.TextBox("Code", null, new { @class = "form-control", @placeholder = "Adauga Serie Vanzare", onkeyup = "blankme(this.id)" })
                                         <small id="error_Code" class="form-text error_msg col-md-offset-2 "> Seria facturii trebuie completata!</small>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Date"> Data  &nbsp</label>
-                                        @Html.TextBox("Date", null, new { @class = "form-control mydatepicker", @placeholder = "Select Sale Date ", onchange = "blankme(this.id)" })
+                                        @Html.TextBox("Date", null, new { @class = "form-control mydatepicker", @placeholder = "Selecteaza Data Vanzare ", onchange = "blankme(this.id)" })
                                         <small id="error_Date" class="form-text error_msg col-md-offset-2 ">Data vanzarii trebuie completata!</small>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                             <label class="col-md-2">Cautare Produs</label>
                             <div class="input-group input-group-default col-md-8">
                                 <span class="input-group-btn"><button class="btn btn-primary" type="submit"><i class="ti-search"></i></button></span>
-                                <input type="text" placeholder="Search Product" name="Search" id="Search" class="form-control">
+                                <input type="text" placeholder="Cauta Produs" name="Search" id="Search" class="form-control">
                             </div>
 
                             <br />
@@ -97,7 +97,7 @@
                                 </tfoot>
                             </table>
 
-                            <small id="error_SubTotal" class="form-text error_msg">Atleast add one item</small>
+                            <small id="error_SubTotal" class="form-text error_msg">Adauga cel putin un produs</small>
                             <br />
                             <br />
 
@@ -126,7 +126,7 @@
 
                                     <div class="form-group">
                                         <label for="Notes"> Detalii: </label>
-                                        @Html.TextArea("Notes", new { @class = "form-control", @rows = "5", @placeholder = "Enter Notes" })
+                                        @Html.TextArea("Notes", new { @class = "form-control", @rows = "5", @placeholder = "Adauga Detalii" })
                                     </div>
                                 </div>
 
@@ -134,13 +134,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="Discount"> Discount : </label>
-                                        @Html.TextBox("Discount", null, new { @class = "form-control", @Value = 0, @type = "number", @placeholder = "Discount Amount ", onchange = "DiscountAmount()" })
+                                        @Html.TextBox("Discount", null, new { @class = "form-control", @Value = 0, @type = "number", @placeholder = "Valoare Discount ", onchange = "DiscountAmount()" })
                                         <small id="error_Discount" class="form-text error_msg">Discount can't be empty</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="GrandTotal"> Grand Total : </label>
                                         <input type="text" id="GrandTotal" class="form-control" readonly />
-                                        <small id="error_GrandTotal" class="form-text error_msg">Total is empty</small>
+                                        <small id="error_GrandTotal" class="form-text error_msg">Valoare totala 0</small>
                                     </div>
                                 </div>
                             </div>

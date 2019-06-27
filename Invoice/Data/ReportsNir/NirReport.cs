@@ -353,11 +353,6 @@ namespace PharmaApp.Web.Reports
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
                 _pdfPTable.AddCell(_pdfPCell);
 
-                _pdfPCell = new PdfPCell(new Phrase(item.QuantityReceived.ToString(), _fontStyle));
-                _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
-                _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-                _pdfPCell.BackgroundColor = BaseColor.WHITE;
-                _pdfPTable.AddCell(_pdfPCell);
 
                 _pdfPCell = new PdfPCell(new Phrase(item.Amount.ToString(), _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
