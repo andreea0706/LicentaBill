@@ -43,9 +43,9 @@ namespace Invoice.Controllers
         }
         public IActionResult Index()
         {
-            var dashboard= new DashboardViewModel
+            var dashboard = new DashboardViewModel
             {
-
+                AllCustomers = customerRepository.All(),
                 Customers = customerRepository.All().Count(),
                 Products = _productRepository.All().Count(),
                 TotalSales = saleRepository.All().Count(),
@@ -204,7 +204,7 @@ namespace Invoice.Controllers
             }
             return View(model);
         }
-
+    
         [HttpGet]
         public ActionResult EditCustomer(int customerId)
         {

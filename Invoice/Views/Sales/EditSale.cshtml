@@ -118,8 +118,8 @@
                                         <label for="Status"> Status factura : </label>
                                         @Html.DropDownList("Status", new List<SelectListItem>
                                         {
-                                            new SelectListItem() {Text = "De plata", Value="Due"},
-                                            new SelectListItem() {Text = "Platita", Value="Paid"},
+                                            new SelectListItem() {Text = "De platit", Value="De platit"},
+                                            new SelectListItem() {Text = "Platita", Value="Platita"},
                                         }, "Select Status", new { @class = "form-control", onchange = "blankme(this.id)" })
                                         <small id="error_Status" class="form-text error_msg">Selecteaza status factura</small>
                                     </div>

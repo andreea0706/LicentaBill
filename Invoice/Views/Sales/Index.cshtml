@@ -17,56 +17,58 @@
                         <div class="table-responsive m-t-10">
                             <table id="example23" class="display nowrap table table-hover  table-bordered" cellspacing="0" width="100%">
                                 <thead>
-                                    <tr>
+                                    <tr  style="text-align:center;">
                                         <th>Serie Factura</th>
                                         <th>Data</th>
                                         <th>Total</th>
                                         <th>Reducere</th>
                                         <th>Total Vanzare</th>
                                         <th>Status Factura</th>
-                                        <th>Optiuni</th>
+                                        <th style="text-align:center;" >Optiuni</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr style="text-align:center;" >
                                             <td>@item.SaleCode</td>
                                             <td>@item.SalesDate.ToString("dd/MM/yyyy")</td>
-                                            <td>@item.Total</td>
+                                            <td>@item.Total RON</td>
                                             <td>@item.Discount</td>
-                                            <td>@item.GrandTotal</td>
-                                            <td>
-                                                @if (item.Status == "Due")
+                                            <td>@item.GrandTotal RON</td>
+                                            <td style="text-align:center;">
+                                                @if (item.Status == "De platit")
                                                 {
-                                                    <label class="label label-warning">De platit</label>
-
+                                                <div style="text-align:center;font-size:20px;"> 
+                                                    <label class="label label-warning" >De platit</label>
+                                                </div>
                                                 }
-                                                @if (item.Status == "Paid")
+                                                @if (item.Status == "Platita")
                                                 {
+                                                <div style="text-align:center; font-size:20px;">
                                                     <label class="label label-success">Platita</label>
-
+                                                </div>
                                                 }
                                             </td>
-                                            <td>
+                                            <td style="text-align:center;">
 
-                                                <a href="@Url.Action("SendEmail","Sales", new {saleId = item.Id})" title="Trimite Email" style="padding:5px;">
-                                                    <i class="fa fa-envelope" style="font-size:15px;"></i>
+                                                <a href="@Url.Action("SendEmail","Sales", new {saleId = item.Id})" title="Trimite Email" style="padding-right:10px;">
+                                                    <i class="fa fa-envelope" style="font-size:18px;"></i>
                                                 </a>
 
-                                                <a href="@Url.Action("SaleInvoice","Sales", new {saleId = item.Id,style=1})" title="Model Factura 1" style="padding:5px;">
-                                                    <i class="fa fa-file" style="font-size:15px;"></i>
+                                                <a href="@Url.Action("SaleInvoice","Sales", new {saleId = item.Id,style=1})" title="Model Factura 1" style="padding:10px;">
+                                                    <i class="fa fa-file" style="font-size:18px;"></i>
                                                 </a>
 
-                                                <a href="@Url.Action("SaleInvoice","Sales", new {saleId = item.Id,style=2})" title="Model Factura 2" style="padding:5px;">
-                                                    <i class="fa fa-file" style="font-size:15px;"></i>
+                                                <a href="@Url.Action("SaleInvoice","Sales", new {saleId = item.Id,style=2})" title="Model Factura 2" style="padding:10px;">
+                                                    <i class="fa fa-file" style="font-size:18px;"></i>
                                                 </a>
 
-                                                <a href="@Url.Action("EditSale", "Sales", new {saleId= item.Id})" title="Editeaza" style="padding:5px;">
-                                                    <i class="fa fa-edit" style="font-size:15px;"></i>
+                                                <a href="@Url.Action("EditSale", "Sales", new {saleId= item.Id})" title="Editeaza" style="padding:10px;">
+                                                    <i class="fa fa-edit" style="font-size:18px;"></i>
                                                 </a>
-                                                <a href="@Url.Action("DeleteSale", "Sales", new {saleId = item.Id})" title="Sterge" style="padding:5px;" onclick="return confirm('Sigur doresti sa stergi aceasta factura?')">
-                                                    <i class="fa fa-trash" style="font-size:15px;"></i>
+                                                <a href="@Url.Action("DeleteSale", "Sales", new {saleId = item.Id})" title="Sterge" style="padding-left:10px;" onclick="return confirm('Sigur doresti sa stergi aceasta factura?')">
+                                                    <i class="fa fa-trash" style="font-size:18px;"></i>
                                                 </a>
                                             </td>
                                         </tr>

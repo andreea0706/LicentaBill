@@ -66,20 +66,20 @@
                         <div class="table-responsive m-t-12">
                             <table id="example23" class="display nowrap table table-hover  table-bordered" cellspacing="0" width="100%">
                                 <thead>
-                                    <tr>
+                                    <tr style="text-align:center;">
                                         <th>Serie Factura</th>
                                         <th>Data</th>
                                         <th>Total</th>
                                         <th>Discount</th>
                                         <th>Total Factura</th>
-                                        <th>Status</th>
+                                        <th style="text-align:center;">Status</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr style="text-align:center;">
                                             <td>@item.SaleCode</td>
                                             <td>@item.SalesDate.ToString("dd/MM/yyyy")</td>
                                             <td>@item.Total</td>
@@ -89,14 +89,18 @@
                                                 @{total = total + item.GrandTotal;}
                                             </td>
                                             <td>
-                                                @if (item.Status == "Due")
+                                                @if (item.Status == "De platit")
                                                 {
-                                                    <label class="label label-warning">De platit</label>
+                                                    <div style="text-align:center;font-size:20px;">
+                                                        <label class="label label-warning">De platit</label>
+                                                    </div>
 
                                                 }
-                                                @if (item.Status == "Paid")
+                                                @if (item.Status == "Platita")
                                                 {
-                                                    <label class="label label-success">Platita</label>
+                                                    <div style="text-align:center; font-size:20px;">
+                                                        <label class="label label-success">Platita</label>
+                                                    </div>
 
                                                 }
                                             </td>

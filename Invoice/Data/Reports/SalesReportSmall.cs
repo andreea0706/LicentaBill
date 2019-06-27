@@ -30,7 +30,7 @@ namespace PharmaApp.Web.Reports
         public SalesReportSmall()
         {
 
-            paymentTable = new PdfPTable(1);
+            paymentTable = new PdfPTable(2);
             _pdfPTable = new PdfPTable(_totalColumn);
             _memoryStream = new MemoryStream();
 
@@ -39,9 +39,6 @@ namespace PharmaApp.Web.Reports
         public byte[] CreateReport(SaleReportViewModel model)
         {
            _model = model;
-
-            //public Document(iTextSharp.text.Rectangle pageSize);
-            //            public Document(iTextSharp.text.Rectangle pageSize, float, float, float, float);
 
             #region page
             
@@ -58,7 +55,7 @@ namespace PharmaApp.Web.Reports
 
             paymentTable.WidthPercentage = 100;
             paymentTable.HorizontalAlignment = Element.ALIGN_LEFT;
-            paymentTable.SetWidths(new float[] { 100f });
+            paymentTable.SetWidths(new float[] { 50f, 50f });
 
             this.reportHeader();
             this.reportBody();
@@ -149,7 +146,17 @@ namespace PharmaApp.Web.Reports
 
 
             _fontStyle = FontFactory.GetFont("Tahoma", 7f, 1);
-            _pdfPCell = new PdfPCell(new Phrase("TO : ", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase("CATRE : ", _fontStyle));
+            _pdfPCell.Colspan = 2;
+            _pdfPCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            _pdfPCell.Border = 0;
+            _pdfPCell.BackgroundColor = BaseColor.WHITE;
+            _pdfPCell.ExtraParagraphSpace = 0;
+            paymentTable.AddCell(_pdfPCell);
+            paymentTable.CompleteRow();
+
+            _fontStyle = FontFactory.GetFont("Tahoma", 6f, 0);
+            _pdfPCell = new PdfPCell(new Phrase("Nume Client : ", _fontStyle));
             _pdfPCell.Colspan = 1;
             _pdfPCell.HorizontalAlignment = Element.ALIGN_LEFT;
             _pdfPCell.Border = 0;
@@ -157,8 +164,17 @@ namespace PharmaApp.Web.Reports
             _pdfPCell.ExtraParagraphSpace = 0;
             paymentTable.AddCell(_pdfPCell);
 
-            _fontStyle = FontFactory.GetFont("Tahoma", 6f, 0);
             _pdfPCell = new PdfPCell(new Phrase(_model.Sales.CustomerModel.Name, _fontStyle));
+            _pdfPCell.Colspan = 1;
+            _pdfPCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            _pdfPCell.Border = 0;
+            _pdfPCell.BackgroundColor = BaseColor.WHITE;
+            _pdfPCell.ExtraParagraphSpace = 0;
+            paymentTable.AddCell(_pdfPCell);
+            paymentTable.CompleteRow();
+
+            _fontStyle = FontFactory.GetFont("Tahoma", 6f, 0);
+            _pdfPCell = new PdfPCell(new Phrase("Numar Telefon: ", _fontStyle));
             _pdfPCell.Colspan = 1;
             _pdfPCell.HorizontalAlignment = Element.ALIGN_LEFT;
             _pdfPCell.Border = 0;
@@ -174,7 +190,7 @@ namespace PharmaApp.Web.Reports
             _pdfPCell.BackgroundColor = BaseColor.WHITE;
             _pdfPCell.ExtraParagraphSpace = 0;
             paymentTable.AddCell(_pdfPCell);
-
+            paymentTable.CompleteRow();
 
 
             _pdfPCell = new PdfPCell(new Phrase(" ", _fontStyle));
@@ -188,7 +204,17 @@ namespace PharmaApp.Web.Reports
 
 
             _fontStyle = FontFactory.GetFont("Tahoma", 7f, 1);
-            _pdfPCell = new PdfPCell(new Phrase("INVOICE :  ", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase("FACTURA :  ", _fontStyle));
+            _pdfPCell.Colspan = 2;
+            _pdfPCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            _pdfPCell.Border = 0;
+            _pdfPCell.BackgroundColor = BaseColor.WHITE;
+            _pdfPCell.ExtraParagraphSpace = 0;
+            paymentTable.AddCell(_pdfPCell);
+            paymentTable.CompleteRow();
+
+            _fontStyle = FontFactory.GetFont("Tahoma", 6f, 0);
+            _pdfPCell = new PdfPCell(new Phrase("Serie Document: ", _fontStyle));
             _pdfPCell.Colspan = 1;
             _pdfPCell.HorizontalAlignment = Element.ALIGN_LEFT;
             _pdfPCell.Border = 0;
@@ -196,8 +222,6 @@ namespace PharmaApp.Web.Reports
             _pdfPCell.ExtraParagraphSpace = 0;
             paymentTable.AddCell(_pdfPCell);
 
-
-           
 
             _fontStyle = FontFactory.GetFont("Tahoma", 6f, 0);
             _pdfPCell = new PdfPCell(new Phrase(_model.Sales.SaleCode, _fontStyle));
@@ -209,7 +233,16 @@ namespace PharmaApp.Web.Reports
             paymentTable.AddCell(_pdfPCell);
             paymentTable.CompleteRow();
 
-           
+            _fontStyle = FontFactory.GetFont("Tahoma", 6f, 0);
+            _pdfPCell = new PdfPCell(new Phrase("Data Vanzare: ", _fontStyle));
+            _pdfPCell.Colspan = 1;
+            _pdfPCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            _pdfPCell.Border = 0;
+            _pdfPCell.BackgroundColor = BaseColor.WHITE;
+            _pdfPCell.ExtraParagraphSpace = 0;
+            paymentTable.AddCell(_pdfPCell);
+
+
             _fontStyle = FontFactory.GetFont("Tahoma", 6f, 0);
             _pdfPCell = new PdfPCell(new Phrase(_model.Sales.SalesDate.ToShortDateString(), _fontStyle));
             _pdfPCell.Colspan = 1;
@@ -260,31 +293,31 @@ namespace PharmaApp.Web.Reports
 
 
             _fontStyle = FontFactory.GetFont("Tahoma", 5f, 1);
-            _pdfPCell = new PdfPCell(new Phrase("SL No", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase("Nr. Crt.", _fontStyle));
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             _pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             _pdfPTable.AddCell(_pdfPCell);
 
-            _pdfPCell = new PdfPCell(new Phrase("Item", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase("Nume Produs", _fontStyle));
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             _pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             _pdfPTable.AddCell(_pdfPCell);
 
-            _pdfPCell = new PdfPCell(new Phrase("Price", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase("Pret", _fontStyle));
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             _pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             _pdfPTable.AddCell(_pdfPCell);
 
-            _pdfPCell = new PdfPCell(new Phrase("Qnt", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase("Cantitate", _fontStyle));
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             _pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             _pdfPTable.AddCell(_pdfPCell);
 
-            _pdfPCell = new PdfPCell(new Phrase("Amount", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase("Valoare", _fontStyle));
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             _pdfPCell.BackgroundColor = BaseColor.LIGHT_GRAY;
@@ -349,7 +382,7 @@ namespace PharmaApp.Web.Reports
             _pdfPCell.BackgroundColor = BaseColor.WHITE;
             _pdfPTable.AddCell(_pdfPCell);
 
-            _pdfPCell = new PdfPCell(new Phrase(_model.company.Currency + _model.Sales.Total.ToString(), _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase( _model.Sales.Total.ToString() + " " + _model.company.Currency , _fontStyle));
             _pdfPCell.Border = 0;
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -368,7 +401,7 @@ namespace PharmaApp.Web.Reports
             _pdfPCell.BackgroundColor = BaseColor.WHITE;
             _pdfPTable.AddCell(_pdfPCell);
 
-            _pdfPCell = new PdfPCell(new Phrase(_model.company.Currency + _model.Sales.Discount.ToString(), _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase(_model.Sales.Discount.ToString() + " " + _model.company.Currency, _fontStyle));
             _pdfPCell.Border = 0;
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -445,7 +478,7 @@ namespace PharmaApp.Web.Reports
 
             #endregion
             _fontStyle = FontFactory.GetFont("Tahoma", 6f, 0);
-            _pdfPCell = new PdfPCell(new Phrase(" Thanks for your shoping.", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase(" Multumim pentru cumparaturi!", _fontStyle));
             _pdfPCell.Colspan = _totalColumn;
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.Border = 0;
@@ -455,7 +488,7 @@ namespace PharmaApp.Web.Reports
             _pdfPTable.CompleteRow();
 
             _fontStyle = FontFactory.GetFont("Tahoma", 6f, 0);
-            _pdfPCell = new PdfPCell(new Phrase("Sales Invoice generated by : Kodauthor, contact : facebook.com/kodauthor ", _fontStyle));
+            _pdfPCell = new PdfPCell(new Phrase("Factura generata de : Andreea Ionescu, contact : andreea.ionescu@gmail.com ", _fontStyle));
             _pdfPCell.Colspan = _totalColumn;
             _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfPCell.Border = 0;

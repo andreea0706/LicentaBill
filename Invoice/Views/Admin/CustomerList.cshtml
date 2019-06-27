@@ -17,33 +17,34 @@
                         <div class="table-responsive m-t-40">
                             <table id="example23" class="display nowrap table table-hover  table-bordered" cellspacing="0" width="100%">
                                 <thead>
-                                    <tr>
+                                    <tr style="text-align:center;">
                                         <th>Nume</th>
                                         <th>Email</th>
                                         <th>Numar Telefon</th>
                                         <th>Detalii</th>
-                                        <th>Optiuni</th>
+                                        <th style="text-align:center;">Optiuni</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model.Customers)
                                     {
                                         <tr>
-                                            <td>
+                                            <td style="text-align:center;">
                                                 <form asp-controller="admin" asp-action="GetCustomerProfile" method="post">
-                                                    <input asp-for="Customer.Id" type="text" value="@item.Id" style="display:none"/>
+                                                    <input asp-for="Customer.Id" type="text" value="@item.Id" style="display:none" />
                                                     <input type="submit" value="@item.Name" style="border:none;background:none;" />
                                                 </form>
                                             </td>
-                                            <td>@item.Email</td>
-                                            <td>@item.Phone</td>
-                                            <td>@item.Notes</td>
-                                            <td>
-                                                <a href="@Url.Action("EditCustomer", "Admin", new {customerId = item.Id})" class="btn btn-icon btn-warning btn-xs m-b-5">
-                                                    <i class="fa fa-edit"></i>
+                                            <td style="text-align:center;">@item.Email</td>
+                                            <td style="text-align:center;">@item.Phone</td>
+                                            <td style="text-align:center;">@item.Notes</td>
+                                            <td style="text-align:center;">
+                                                <a href="@Url.Action("EditCustomer", "Admin", new {customerId = item.Id})" style="padding:5px;">
+                                                    <i class="fa fa-edit" style="font-size:15px;"></i>
                                                 </a>
-                                                <a href="@Url.Action("DeleteCustomer", "Admin", new {customerId = item.Id})" onclick="return confirm('Are you sure you want to Remove this customer?')" class="btn btn-icon btn-danger btn-xs m-b-5">
-                                                    <i class="fa fa-remove"></i>
+                                                <a href="@Url.Action("DeleteCustomer", "Admin", new {customerId = item.Id})" style="padding:5px;" onclick="return confirm('Are you sure you want to Remove this customer?')">
+                                                    <i class="fa fa-user-times" style="font-size:15px;"></i>
+
                                                 </a>
                                             </td>
                                         </tr>
@@ -58,11 +59,30 @@
         <!-- End PAge Content -->
     </div>
 </div>
+@section scripts {
+    <script>
+        window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+        let finalTranscript = '';
+        let recognition = new window.SpeechRecognition();
+        recognition.interimResults = true;
+        recognition.lang = "ro-RO";
+        recognition.maxAlternatives = 10;
+        recognition.continuous = true;
 
 
+        recognition.onresult = (event) => {
+            let interimTranscript = '';
 
-
-
-@section scripts{
-
-}
+            for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
+                let transcript = event.results[i][0].transcript;
+                if (event.results[i].isFinal) {
+                    finalTranscript += transcript;
+                } else {
+                    interimTranscript += transcript;
+                }
+            }
+            document.querySelector('body').innerHTML = finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</>';
+        }
+        recognition.start();
+    </script>
+    }

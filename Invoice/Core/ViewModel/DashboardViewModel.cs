@@ -13,5 +13,6 @@ namespace Invoice.Core.ViewModel
         public double TotalSaleValue { get; set; }
         public int TotalSales { get; set; }
         public List<SalesModel> LastFiveSales { get; set; }
+        public IEnumerable<Invoice.Core.Entity.CustomerModel> AllCustomers { get; set; }
     }
 }

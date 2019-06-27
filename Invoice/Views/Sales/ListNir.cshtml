@@ -6,54 +6,42 @@
 
 <div class="page-wrapper">
     <div class="container-fluid">
-        <!-- Start Page Content -->
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Lista Vanzari</h5>
+                        <h5 class="card-title">Lista Nota Intrare Receptie</h5>
                         <div class="table-responsive m-t-10">
                             <table id="example23" class="display nowrap table table-hover  table-bordered" cellspacing="0" width="100%">
                                 <thead>
-                                    <tr>
-                                        <th>Serie Factura</th>
+                                    <tr style="text-align:center;">
+                                        <th>Serie Document</th>
                                         <th>Data</th>
                                         <th>Total</th>
                                         <th>Reducere</th>
                                         <th>Total Vanzare</th>
-                                        <th>Status Factura</th>
-                                        <th>Optiuni</th>
+                                        <th style="text-align:center;">Optiuni</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@item.NirCode</td>
-                                            <td>@item.NirDate.ToString("dd/MM/yyyy")</td>
-                                            <td>@item.Total</td>
-                                            <td>@item.Discount</td>
-                                            <td>@item.GrandTotal</td>
-                                            <td>
-                                                @if (item.Status == "Due")
-                                                {
-                                                    <label class="label label-warning">De platit</label>
-
-                                                }
-                                                @if (item.Status == "Paid")
-                                                {
-                                                    <label class="label label-success">Platita</label>
-
-                                                }
-                                            </td>
-                                            <td>
-                                                <a href="@Url.Action("NirDoc","Sales", new {nirId = item.Id, style=1})" title="Invoice 1" class="btn btn-icon btn-primary btn-xs m-b-5"><i class="fa fa-print"> </i> </a>
-
-                                                <a href="@Url.Action("EditNir", "Sales", new {nirId= item.Id})" title="Edit" class="btn btn-icon btn-warning btn-xs m-b-5">
-                                                    <i class="fa fa-edit"></i>
+                                            <td style="text-align:center;">@item.NirCode</td>
+                                            <td style="text-align:center;">@item.NirDate.ToString("dd/MM/yyyy")</td>
+                                            <td style="text-align:center;">@item.Total RON</td>
+                                            <td style="text-align:center;">@item.Discount</td>
+                                            <td style="text-align:center;">@item.GrandTotal RON</td>
+                                            <td style="text-align:center;">
+                                                <a href="@Url.Action("NirDoc","Sales", new {nirId = item.Id,style=1})" title="Model Factura 1" style="padding:10px;">
+                                                    <i class="fa fa-file" style="font-size:18px;"></i>
                                                 </a>
-                                                <a href="@Url.Action("DeleteNir", "Sales", new {nirId = item.Id})" title="delete" onclick="return confirm('Sigur doresti sa stergi aceasta factura?')" class="btn btn-icon btn-danger btn-xs m-b-5">
-                                                    <i class="fa fa-remove"></i>
+
+                                                <a href="@Url.Action("EditNir", "Sales", new {nirId= item.Id})" title="Editeaza" style="padding:10px;">
+                                                    <i class="fa fa-edit" style="font-size:18px;"></i>
+                                                </a>
+                                                <a href="@Url.Action("DeleteNir", "Sales", new {nirId = item.Id})" title="Sterge" style="padding-left:10px;" onclick="return confirm('Sigur doresti sa stergi aceasta factura?')">
+                                                    <i class="fa fa-trash" style="font-size:18px;"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -65,6 +53,5 @@
                 </div>
             </div>
         </div>
-        <!-- End Page Content -->
     </div>
 </div>

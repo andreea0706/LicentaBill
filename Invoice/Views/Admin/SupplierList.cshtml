@@ -16,30 +16,30 @@
                         <div class="table-responsive m-t-40">
                             <table id="example23" class="display nowrap table table-hover  table-bordered" cellspacing="0" width="100%">
                                 <thead>
-                                    <tr>
+                                    <tr style="text-align:center;">
                                         <th>Nr. Crt.</th>
                                         <th>Nume</th>
                                         <th>Email</th>
                                         <th>Numar Telefon</th>
                                         <th>Detalii</th>
-                                        <th>Optiuni</th>
+                                        <th style="text-align:center;">Optiuni</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr style="text-align:center;">
                                             <td>@item.Id</td>
                                             <td>@item.Name</td>
                                             <td>@item.Email</td>
                                             <td>@item.Phone</td>
                                             <td>@item.Notes</td>
-                                            <td>
-                                                <a href="@Url.Action("EditSupplier", "Admin", new {supplierId = item.Id})" class="btn btn-icon btn-warning btn-xs m-b-5">
-                                                    <i class="fa fa-edit"></i>
+                                            <td style="text-align:center;">
+                                                <a href="@Url.Action("EditSupplier", "Admin", new {supplierId = item.Id})" style="padding:5px;" >
+                                                    <i class="fa fa-edit" style="font-size:15px;"></i>
                                                 </a>
-                                                <a href="@Url.Action("DeleteSupplier", "Admin", new {supplierId = item.Id})" onclick="return confirm('Esti sigur ca vrei sa stergi acest furnizor?')" class="btn btn-icon btn-danger btn-xs m-b-5">
-                                                    <i class="fa fa-remove"></i>
+                                                <a href="@Url.Action("DeleteSupplier", "Admin", new {supplierId = item.Id})" onclick="return confirm('Esti sigur ca vrei sa stergi acest furnizor?')">
+                                                    <i class="fa fa-user-times" style="font-size:15px;"></i>
                                                 </a>
                                             </td>
                                         </tr>
